@@ -12,10 +12,8 @@ setup:
 	# s1 <- display register addr
 	# s2 <- pointer to string
 	
-	li	t0, disp_ready_addr
-	lw	s0, 0(t0)
-	li	t0, disp_register_addr
-	lw	s1, 0(t0)
+	li	s0, disp_ready_addr
+	li	s1, disp_register_addr
 	la	s2, string
 	
 wait_for_ready:
