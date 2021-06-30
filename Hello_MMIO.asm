@@ -1,20 +1,20 @@
+.include "servicios_mmio.asm"
+
 .data
 
-reciber_control_regis:	.word 0xFFFF0000
-keystroke_text_area:	.word 0xFFFF0004
-disp_ready_addr: 	.word 0xFFFF0008
-disp_register_addr:	.word 0xFFFF000C
 
-string:	.asciz "Hello MIMMIO SIMULATOR\n"
+
+string:	.asciz "Hello MIMMIO SIMULATOR \n"
 
 .text
 setup:
 	# s0 <- display ready bit addr
 	# s1 <- display register addr
 	# s2 <- pointer to string
-	la	t0, disp_ready_addr
+	
+	li	t0, disp_ready_addr
 	lw	s0, 0(t0)
-	la	t0, disp_register_addr
+	li	t0, disp_register_addr
 	lw	s1, 0(t0)
 	la	s2, string
 	
