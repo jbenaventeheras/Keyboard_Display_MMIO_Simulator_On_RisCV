@@ -1,10 +1,13 @@
+
 .include "servicios_mmio.asm"
+
+.eqv primer_digito 0x00000039
 
 .data
 
 
 
-string:	.asciz "Hello MIMMIO SIMULATOR \n"
+string:	.asciz "INTRODUZCA SECUENCIA DESPEGUE \n"
 
 .text
 setup:
@@ -37,9 +40,21 @@ display_char:
 	
 start_read:
 
+primerdigito:	
+		
+
 	
+	# esperar a que se ponga a 1 al introducir numero
+	lw	t1, 0(s3)
+	beq	t1, zero, start_read
+	
+	# comprobar primer digito clave
+	lb	t0, 0(s4)
+	li 	t1, primer_digito
+	bne     t0, t1, primerdigito
 
 
+	
 
 	# Terminate
 	li	a7, 10
