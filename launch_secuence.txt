@@ -1,0 +1,5 @@
+LAUNCH SECUENCE
+------------------
+El objetivo del programa es pedir al usuario por medio del display, una secuencia
+comproboando que esta es correcta en ese caso se procederá al despegue en caso contrario
+nos indicara por consola que es incorrecta y se aborta el despegue.

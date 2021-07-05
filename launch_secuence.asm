@@ -15,6 +15,7 @@ setup:
 	li	s0, disp_ready_addr
 	li	s1, disp_register_addr
 	li 	s3, reciber_control_regis
+	li 	s4, keystroke_text_area
 	la	s2, string
 	
 wait_for_ready:
@@ -25,7 +26,7 @@ wait_for_ready:
 display_char:
 	# Check for null character
 	lb	t0, 0(s2)
-	beq	t0, zero, end_of_string
+	beq	t0, zero, start_read
 	
 	# Write to display
 	sw	t0, 0(s1)
@@ -34,7 +35,12 @@ display_char:
 	addi	s2, s2, 1
 	j	wait_for_ready
 	
-end_of_string:
+start_read:
+
+	
+
+
+
 	# Terminate
 	li	a7, 10
 	ecall

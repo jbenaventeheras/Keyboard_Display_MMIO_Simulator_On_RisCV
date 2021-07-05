@@ -15,6 +15,7 @@ setup:
 	li	s0, keystroke_text_area
 	li	s1, disp_register_addr
 	li 	s3, reciber_control_regis
+	li 	s4, keystroke_text_area
 	
 	lb	t0, 0(s0)
 	sw	t0, 0(s1)
