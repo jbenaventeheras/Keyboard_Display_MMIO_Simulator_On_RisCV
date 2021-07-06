@@ -19,10 +19,6 @@ string2:	.asciz "lANZAMIENTO INICIADO \n"
 	# s2 <- pointer to string
 	
 	
-	li 	a4, keystroke_text_area
-	la	a3, string
-	la	a5, string2
-	
 #----------------------------------------------
 #-- PROGRAMA PRINCIPAL
 #----------------------------------------------
@@ -32,8 +28,10 @@ string2:	.asciz "lANZAMIENTO INICIADO \n"
 		la	a3, string
 		jal print_string
 		
-		
-		jal read_int
+		li	a0, disp_ready_addr
+		li	a1, disp_register_addr
+		li 	a3, keystroke_text_area
+		jal 	read_keyboard
 		
 		# Terminate
 		li	a7, 10
@@ -71,9 +69,9 @@ end:
 
 
 #-------------------------------------------------------------------	
-#------ SUBRUTINA: read
-#------   * Parametros de entrada: a0 disp_ready_addr a1 disp_register_addr a2 reciber_control_regis
-#------   * Parametros de salida: Ninguno
+#------ SUBRUTINA: read_keyboard
+#------   * Parametros de entrada: a0 disp_ready_addr a1 disp_register_addr a2 reciber_control_regis a3 keystroke_text_area
+#------   * Parametros de salida: a0 char read
 #-------------------------------------------------------------------
 read_keyboard:  #-- Punto de entrada
 
@@ -81,7 +79,7 @@ read_keyboard:  #-- Punto de entrada
 	# esperar a que se ponga a 1 al introducir numero
 	lw	t1, 0(a2)
 	beq	t1, zero, read_keyboard
-	lb	t0, 0(s4)
-	mv 	t0, a0
+	lb	t0, 0(a3)
+	mv 	a0, t0
 	
 	ret
