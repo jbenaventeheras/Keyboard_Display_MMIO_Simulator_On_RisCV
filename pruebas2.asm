@@ -1,16 +1,17 @@
 .include "servicios_mmio.asm"
 
-.eqv primer_digito 0x00000039
-.eqv segundo_digito 0x00000035
+.eqv primer_digito 0x00000039 #9
+.eqv segundo_digito 0x00000035 #5
+.eqv tercer_digito 0x00000037 #4
 
 
 .data
 
 
 
-string:		.asciz "INTRODUZCA SECUENCIA DESPEGUE \n"
-string2:	.asciz "lANZAMIENTO INICIADO \n"
-string3:	.asciz "lANZAMIENTO FALLIDO \n"
+string:		.asciz "---------INTRODUZCA SECUENCIA DESPEGUE------- \n"
+string2:	.asciz "LANZAMIENTO INICIADO   - ~~~ =:> [XXXXXXXXX]> \n"
+string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 
 .text
 
@@ -58,12 +59,25 @@ string3:	.asciz "lANZAMIENTO FALLIDO \n"
 		bne, s1, t1, fail_check
 		
 		
-		#imprimir string
+		#leer tercer caracter contraseña
+		li	a0, disp_ready_addr
+		li	a1, disp_register_addr
+		li 	a3, keystroke_text_area
+		jal 	read_keyboard
+		
+		mv s2, a0
+		
+		#Comprobar si tercer digito correcto si no abortar lanzamiento
+		li t1, tercer_digito
+		bne, s2, t1, fail_check
+		
+		
+		#imprimir string de lanzamineto en este punto todos digitos correctos
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
 		li 	a2, reciber_control_regis
-		la	a3, string3
+		la	a3, string2
 		jal print_string
 		
 		# Terminate
@@ -132,19 +146,5 @@ read_keyboard:  #-- Punto de entrada
 	mv 	a0, t0
 	
 	ret
-#-------------------------------------------------------------------	
-#------ SUBRUTINA: check_char
-#------   * Parametros de entrada: a0 char1 a1: char2
-#------   * Parametros de salida: a0 1 if equal 0 if not equal in ascci table 0x00000030 0x00000031
-#-------------------------------------------------------------------
-check_char:  #-- Punto de entrada
-	   
-	   
-	   beq	a0, a1, equal
-	   li a0, 0x00000030
-	   
-equal:	   
-	   li a0, 0x00000031
-	   
-	   ret
+
 	   
