@@ -95,6 +95,7 @@ wait_for_ready:
 	beq	t0, zero, wait_for_ready
 	
 display_char:
+
 	# Check for null character
 	lb	t0, 0(a3)
 	beq	t0, zero, end
