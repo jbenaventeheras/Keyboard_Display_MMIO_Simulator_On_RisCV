@@ -53,15 +53,34 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		li, t0, op_suma
 		beq t0, a0, suma
+		li, t0, op_multi
+		beq t0, a0, multi
+		li  t0, op_div
+		beq t0, a0, divi
+		
+div:
+		mv a0, s0
+		mv a1, s1
+		jal dividir
+		b resultado
+		
+multi:
+		mv a0, s0
+		mv a1, s1
+		jal multiplicar
+		b resultado
+		
+	
 suma:
 		
 		mv a0, s0
 		mv a1, s1
 		
-		jal suma
+		jal sumar
+		b resultado
 		
-		
-		
+resultado:
+			 		
 		
 		# Terminate
 		li	a7, 10
