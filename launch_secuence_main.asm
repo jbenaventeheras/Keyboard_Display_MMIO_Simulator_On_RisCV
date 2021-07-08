@@ -80,9 +80,9 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		la	a3, string2
 		jal print_string
 		
-		# Terminate
-		li	a7, 10
-		ecall
+		
+		jal end
+	
 		
 		
 		
@@ -94,7 +94,7 @@ fail_check:
 		li 	a2, reciber_control_regis
 		la	a3, string3
 		jal print_string		
-		
+end:		
 		# Terminate
 		li	a7, 10
 		ecall
