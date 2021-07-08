@@ -3,6 +3,7 @@
 #------   * Parametros de entrada: a0 disp_ready_addr a1 disp_register_addr a2 reciber_control_regis a3 keystroke_text_area
 #------   * Parametros de salida: a0 char read
 #-------------------------------------------------------------------
+.globl dividir
 dividir:  #-- Punto de entrada
 
 	
