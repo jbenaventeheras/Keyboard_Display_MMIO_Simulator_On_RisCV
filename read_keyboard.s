@@ -10,7 +10,7 @@ read_keyboard:  #-- Punto de entrada
 	# esperar a que se ponga a 1 al introducir numero
 	lw	t1, 0(a2)
 	beq	t1, zero, read_keyboard
-	lb	t0, 0(a3)
+	lw	t0, 0(a3)
 	mv 	a0, t0
 	
 	ret

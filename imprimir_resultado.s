@@ -7,8 +7,10 @@
 imprimir_resultado:  #-- Punto de entrada
 
 	
-	lb	t0, 0(a3)
-	sw	t0, 0(a1)
+	
+	li 	t1, '0'
+	add	t3, a3, t1  #-- t3 = t0 - '0
+	sw	a3, 0(a1)
 	
 	
 	ret
