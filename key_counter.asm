@@ -25,12 +25,21 @@ read_keyboard:
 	beq	t1, zero, read_keyboard
 	#contador pulsaciones en s0 al salir este bucle incrementamos
 	addi 	s0, s0,1
+	
+	
+	
+	
 	lw	t0, 0(a3)
 	li	t2, exit_cons
 	beq	t0, t2, exit
 	b read_keyboard
 	
-exit:
 	
+
+	
+exit:
+
+
+
 	li	a7, 10
 	ecall
