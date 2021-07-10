@@ -66,7 +66,10 @@ string3:	.asciz "INTRODUCE OPRENDO * x / \n"
 		mv a0, s0
 		mv a1, s1
 		jal sumar
-		mv s2, a0
+		
+		
+		li  a7, 1 
+		ecall
 		
 	
 		
