@@ -9,7 +9,6 @@ sumar:  #-- Punto de entrada
 	
 	# esperar a que se ponga a 1 al introducir numero
 	add 	t0, a0, a1
-
 	add t0, t0, t1
 
 	mv  a0, t0

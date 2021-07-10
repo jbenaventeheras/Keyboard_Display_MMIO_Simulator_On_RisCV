@@ -4,7 +4,7 @@
 
 
 
-string:	.asciz "5"
+string:	.float 100
 
 .text
 setup:
@@ -15,20 +15,24 @@ setup:
 	li	s0, disp_ready_addr
 	li	s1, disp_register_addr
 	li 	s3, reciber_control_regis
-	li	s2, 1
+	la	s2, string
 	
-
+wait_for_ready:
+	# while(ready_bit == 0);
+	lw	t0, 0(s0)
+	beq	t0, zero, wait_for_ready
 	
 display_char:
 	# Check for null character
 	lb	t0, 0(s2)
-	
+	beq	t0, zero, end_of_string
 	
 	# Write to display
-	sw	s2, 0(s1)
+	sw	t0, 0(s1)
 	
 	# Increment string pointer
-	
+	addi	s2, s2, 1
+	j	wait_for_ready
 	
 end_of_string:
 	# Terminate
