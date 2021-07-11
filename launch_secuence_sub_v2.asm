@@ -28,14 +28,12 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string
+		la	a2, string
 		jal print_string
 		
 		#leer primer caracter contraseña
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
 		jal 	read_keyboard
 		
 		
@@ -47,9 +45,8 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		bne, s0, t1, fail_check
 		
 		#leer segundo caracter contraseña
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
 		jal 	read_keyboard
 		
 		mv s1, a0
@@ -60,9 +57,8 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		
 		#leer tercer caracter contraseña
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
 		jal 	read_keyboard
 		
 		mv s2, a0
@@ -76,8 +72,7 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string2
+		la	a2, string2
 		jal print_string
 		
 		# Terminate
@@ -91,8 +86,7 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 fail_check:
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string3
+		la	a2, string3
 		jal print_string		
 		
 		# Terminate
@@ -114,23 +108,20 @@ wait_for_ready:
 	
 display_char:
 
-	# Check for null character
-	lb	t0, 0(a3)
+	# Check  null char
+	lb	t0, 0(a2)
 	beq	t0, zero, end
 	
-	# Write to display
+	# Write display
 	sw	t0, 0(a1)
 	
-	# Increment string pointer
-	addi	a3, a3, 1
+	# Increment str pointer
+	addi	a2, a2, 1
 	j	wait_for_ready
-	
-	
+
 
 end:
 	ret
-
-
 #-------------------------------------------------------------------	
 #------ SUBRUTINA: read_keyboard
 #------   * Parametros de entrada: a0 disp_ready_addr a1 disp_register_addr a2 reciber_control_regis a3 keystroke_text_area
@@ -140,9 +131,9 @@ read_keyboard:  #-- Punto de entrada
 
 	
 	# esperar a que se ponga a 1 al introducir numero
-	lw	t1, 0(a2)
+	lw	t1, 0(a0)
 	beq	t1, zero, read_keyboard
-	lb	t0, 0(a3)
+	lb	t0, 0(a1)
 	mv 	a0, t0
 	
 	ret

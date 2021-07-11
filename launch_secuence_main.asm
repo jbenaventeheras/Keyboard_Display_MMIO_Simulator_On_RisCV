@@ -77,10 +77,7 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		jal end
 	
 		
-		
-		
-		
-		
+			
 fail_check:
 
 		li	a0, disp_ready_addr
