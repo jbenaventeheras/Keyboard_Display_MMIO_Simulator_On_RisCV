@@ -12,8 +12,9 @@ string:		.asciz "---------bBIENVENIDO AL EDITOR MMIO ESCRIBA PARA MOSTRAR EN DIP
 #--Salimos del bucle de lectura de la entrada pulsado el 0, cuenta la consola normal el numero de pulsaciones del teclado
 #----------------------------------------------
 					
-		li	s1, disp_register_addr
-		li 	s3,  '0'
+		li	s0, disp_register_addr
+		li 	s1,  '0'
+		li	s2,  0
 		
 		#imprimir string
 		
@@ -33,8 +34,8 @@ bucle:
 		jal read_keyboard
 		
 		
-		sw	a0, 0(s1)
-		beq a0, s3, final
+		sw	a0, 0(s0)
+		beq a0, s1, final
 		
 		
 		
