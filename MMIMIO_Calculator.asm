@@ -13,9 +13,10 @@
 
 string:		.asciz "- INTRODUCE PRIMER DIGITO \n"
 string2:	.asciz "- INTRODUCE SEGUNDO DIGITO \n"
-string3:	.asciz "- INTRODUCE OPRENDO * x / \n"
+string3:	.asciz "- INTRODUCE OPRENDO + or x or / \n"
 string4:	.asciz "- VER RESULTADO EN CONSOLA NORMAL \n"
 string5:	.asciz "EL RESULTADO ES: \n"
+string6:	.asciz "EL RESULTADO ES: \n"
 
 .text
 
@@ -65,7 +66,7 @@ string5:	.asciz "EL RESULTADO ES: \n"
 		#leer operador
 		li 	a0, reciber_control_regis
 		li 	a1, keystroke_text_area
-		jal 	read_int
+		jal 	read_keyboard
 		
 		mv s2, a0
 		
@@ -125,6 +126,7 @@ fin:
 		mv a0, s3
 		li  a7, 1 
 		ecall
+		
 		# Terminate
 		li	a7, 10
 		ecall
