@@ -33,9 +33,8 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		jal print_string
 		
 		#leer primer caracter contraseña
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li	a0, reciber_control_regis
+		li	a1, keystroke_text_area 
 		jal 	read_keyboard
 		
 		
@@ -47,9 +46,8 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		bne, s0, t1, fail_check
 		
 		#leer segundo caracter contraseña
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li	a0, reciber_control_regis
+		li	a1, keystroke_text_area 
 		jal 	read_keyboard
 		
 		mv s1, a0
@@ -60,9 +58,8 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		
 		#leer tercer caracter contraseña
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li	a0, reciber_control_regis
+		li	a1, keystroke_text_area 
 		jal 	read_keyboard
 		
 		mv s2, a0
