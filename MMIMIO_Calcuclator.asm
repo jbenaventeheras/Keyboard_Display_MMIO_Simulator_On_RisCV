@@ -14,6 +14,8 @@
 string:		.asciz "-INTRODUC1E PRIMER DIGITO \n"
 string2:	.asciz "INTRODUCE SEGUNDO DIGITO \n"
 string3:	.asciz "INTRODUCE OPRENDO * x / \n"
+string4:	.asciz "VER RESULTADO EN CONSOLA NORMAL \n"
+string5:	.asciz "EL RESULTADO ES: \n"
 
 .text
 
@@ -27,14 +29,12 @@ string3:	.asciz "INTRODUCE OPRENDO * x / \n"
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string
+		la	a2, string
 		jal print_string
 		
 		#leer primer digito
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
 		jal 	read_int
 				
 		mv s0, a0
@@ -43,14 +43,12 @@ string3:	.asciz "INTRODUCE OPRENDO * x / \n"
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string2
+		la	a2, string2
 		jal print_string
 		
 		#leer segundo digito
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
 		jal 	read_int
 		
 		mv s1,a0
@@ -59,17 +57,15 @@ string3:	.asciz "INTRODUCE OPRENDO * x / \n"
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string3
+		la	a2, string3
 		jal print_string
 		
 		
 		
 		#leer operador
-		li	a0, disp_ready_addr
-		li	a1, disp_register_addr
-		li 	a3, keystroke_text_area
-		jal	read_keyboard
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
+		jal 	read_int
 		
 		mv s2, a0
 		
@@ -87,7 +83,8 @@ suma:
 		
 
 		jal sumar
-				
+		
+		mv s3, a0	
 		
 		b fin
 		
@@ -98,6 +95,7 @@ multi:
 
 		jal multiplicar
 				
+		mv s3, a0
 		
 		b fin	
 
@@ -107,12 +105,24 @@ divi:
 		
 
 		jal dividir
-				
+		
+		mv s3, a0				
 		
 		b fin
 	
 fin:		
+		
 
+		li	a0, disp_ready_addr
+		li	a1, disp_register_addr
+		la	a2, string4
+		jal print_string
+
+		la a0, string5
+		li a7, 4
+		ecall
+		
+		mv a0, s3
 		li  a7, 1 
 		ecall
 		# Terminate

@@ -8,9 +8,9 @@ read_int:  #-- Punto de entrada
 
 	
 	# esperar a que se ponga a 1 al introducir numero
-	lw	t1, 0(a2)
+	lw	t1, 0(a0)
 	beq	t1, zero, read_int
-	lb	t0, 0(a3)
+	lb	t0, 0(a1)
 	
 	#-- Obtener el numero del digito (t1 - '0')
 	li t1, '0'
