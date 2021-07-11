@@ -28,14 +28,13 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string
-		jal print_string
+		la	a2, string	
+		jal 	print_string
 		
 		#leer primer caracter contraseña
-		li	a0, reciber_control_regis
-		li	a1, keystroke_text_area 
-		jal 	read_keyboard
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
+		jal read_keyboard
 		
 		
 		#guardamos primer digito en s0
@@ -46,9 +45,9 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		bne, s0, t1, fail_check
 		
 		#leer segundo caracter contraseña
-		li	a0, reciber_control_regis
-		li	a1, keystroke_text_area 
-		jal 	read_keyboard
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
+		jal read_keyboard
 		
 		mv s1, a0
 		
@@ -58,8 +57,8 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		
 		#leer tercer caracter contraseña
-		li	a0, reciber_control_regis
-		li	a1, keystroke_text_area 
+		li 	a0, reciber_control_regis
+		li 	a1, keystroke_text_area
 		jal 	read_keyboard
 		
 		mv s2, a0
@@ -70,13 +69,10 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		
 		#imprimir string de lanzamineto en este punto todos digitos correctos
-		
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string2
-		jal print_string
-		
+		la	a2, string2
+		jal 	print_string
 		
 		jal end
 	
@@ -86,11 +82,11 @@ string3:	.asciz "LANZAMIENTO FALLIDO  xxxxxxxxxxxxxxxxx \n"
 		
 		
 fail_check:
+
 		li	a0, disp_ready_addr
 		li	a1, disp_register_addr
-		li 	a2, reciber_control_regis
-		la	a3, string3
-		jal print_string		
+		la	a2, string3	
+		jal 	print_string	
 end:		
 		# Terminate
 		li	a7, 10
